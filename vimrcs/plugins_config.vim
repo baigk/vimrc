@@ -81,6 +81,7 @@ let NERDTreeShowHidden=0
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 let g:NERDTreeWinSize=35
 map <leader>nn :NERDTreeToggle<cr>
+map <F6> :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark 
 map <leader>nf :NERDTreeFind<cr>
 
@@ -134,3 +135,43 @@ nnoremap <silent> <leader>l :call SyntasticCheckCoffeescript()<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled=0
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => GTaglist setting -
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let Tlist_Ctags_Cmd='ctags' 
+let Tlist_Use_Right_Window=0 "0 window is at left and 1 is at right
+let Tlist_Show_One_File=0 
+let Tlist_File_Fold_Auto_Close=1 "not current file, function list forder and hide
+let Tlist_Exit_OnlyWindow=1 "auto exit vim when there is only taglist window
+let Tlist_Process_File_Always=1 "update tags realtime
+let Tlist_Inc_Winwidth=0
+map <F7> :TlistToggle<CR>
+map <leader>tl :TlistToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => cscope setting -
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F4> :!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp'  -o -iname '*.py'> cscope.files<CR> 
+        \ :!cscope -b -i cscope.files -f cscope.out<CR> 
+        \ :cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
+nmap <C-s> :cs find s <C-R>=expand("<cword>")<CR><CR> :copen<CR><CR>
+nmap <C-g> :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-d> :cs find d <C-R>=expand("<cword>")<CR><CR> :copen<CR><CR>
+nmap <C-c> :cs find c <C-R>=expand("<cword>")<CR><CR> :copen<CR><CR>
+nmap <C-t> :cs find t <C-R>=expand("<cword>")<CR><CR> :copen<CR><CR>
+nmap <C-e> :cs find e <C-R>=expand("<cword>")<CR><CR> :copen<CR><CR>
+nmap <C-f> :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-i> :cs find i <C-R>=expand("<cfile>")<CR><CR> :copen<CR><CR>
+
+set foldmethod=indent
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ctags setting -
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
+imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
+set tags=tags
+set tags+=./tags "add current directory's generated tags file
+set autochdir

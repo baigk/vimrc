@@ -1,3 +1,11 @@
+
+apt-get install vim vim-scripts vim-doc ctags cscope
+vim-addons install omnicppcomplete taglist winmanager minibufexplorer project
+
+mkdir -p ~/.vim/plugin ~/.vim/doc ~/.vim_runtime
+
+cp * ~/.vim_runtime/ -rf
+cp ~/.vim_runtime/plugin ~/.vim -rf
 cd ~/.vim_runtime
 
 echo 'set runtimepath+=~/.vim_runtime
